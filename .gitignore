@@ -1,0 +1,6 @@
+.DS_Store
+**/.DS_Store
+.cursor/
+*.zip
+languages/__pycache__/
+languages/*.py

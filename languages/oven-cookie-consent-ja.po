@@ -1,0 +1,362 @@
+# Copyright (C) 2025 Oven
+# This file is distributed under the same license as the Oven package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Oven 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-25 12:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+#: includes/class-cookie-manager.php:219
+msgid "Required for site functionality (e.g. login, preferences)."
+msgstr "サイトの機能に必要（例：ログイン、設定）。"
+
+#: includes/class-cookie-manager.php:249
+msgid "Name"
+msgstr "名前"
+
+#: includes/class-cookie-manager.php:250
+msgid "Description"
+msgstr "説明"
+
+#: includes/class-frontend.php:152
+msgid "Currently, all cookies we use are essential for the website to operate. We do not use cookies to track you outside of this website. We care about your privacy. ❤️"
+msgstr "現在、当サイトで使用している Cookie はすべてサイトの運営に必要です。当サイト外での追跡には Cookie を使用しません。プライバシーを大切にしています。❤️"
+
+#: includes/class-frontend.php:180
+msgid "We use cookies to ensure the site works and to improve your experience. You can accept all, only essential, or manage preferences."
+msgstr "サイトの動作と体験向上のため Cookie を使用しています。すべて受け入れる、必要のみ、または設定を管理できます。"
+
+#: includes/class-frontend.php:186
+msgid "Privacy policy"
+msgstr "プライバシーポリシー"
+
+#: includes/class-frontend.php:190
+msgid "We use cookies"
+msgstr "Cookie の使用について"
+
+#: includes/class-frontend.php:192
+msgid "Accept all"
+msgstr "すべて受け入れる"
+
+#: includes/class-frontend.php:193
+msgid "Essential only"
+msgstr "必要のみ"
+
+#: includes/class-frontend.php:194
+msgid "Manage preferences"
+msgstr "設定を管理"
+
+#: includes/class-frontend.php:195
+msgid "Cookie preferences"
+msgstr "Cookie 設定"
+
+#: includes/class-frontend.php:196
+msgid "Save preferences"
+msgstr "設定を保存"
+
+#: includes/class-frontend.php:197
+msgid "Close"
+msgstr "閉じる"
+
+#: includes/class-frontend.php:198
+msgid "Essential cookies"
+msgstr "必要 Cookie"
+
+#: includes/class-frontend.php:199
+msgid "These cookies are required for the website to function (e.g. login, security, preferences)."
+msgstr "これらの Cookie はサイトの機能に必要です（例：ログイン、セキュリティ、設定）。"
+
+#: includes/class-frontend.php:200
+msgid "Non-essential cookies"
+msgstr "任意 Cookie"
+
+#: includes/class-frontend.php:201
+msgid "These cookies are used for analytics or third-party features. You can disable them."
+msgstr "これらの Cookie は分析またはサードパーティ機能に使用されます。無効にできます。"
+
+#: includes/class-frontend.php:202
+msgid "We have updated our cookie policy. Please review and accept again."
+msgstr "Cookie ポリシーを更新しました。再度ご確認のうえ同意してください。"
+
+#: includes/class-rest-controller.php:140
+msgid "Login required."
+msgstr "ログインが必要です。"
+
+#: includes/class-rest-controller.php:186
+msgid "Security check failed."
+msgstr "セキュリティチェックに失敗しました。"
+
+#: includes/class-rest-controller.php:152
+msgid "Not allowed."
+msgstr "許可されていません。"
+
+#: includes/class-rest-controller.php:190
+msgid "Not logged in."
+msgstr "ログインしていません。"
+
+#: includes/class-rest-controller.php:197
+msgid "Invalid consent data."
+msgstr "同意データが無効です。"
+
+#: includes/class-settings.php:90
+msgid "Oven Cookie Consent"
+msgstr "Oven Cookie 同意"
+
+#: includes/class-settings.php:91
+msgid "Oven"
+msgstr "Oven"
+
+#: includes/class-settings.php:113
+msgid "Cookie Consent"
+msgstr "Cookie 同意"
+
+#: includes/class-settings.php:121
+msgid "Enable cookie consent"
+msgstr "Cookie 同意を有効化"
+
+#: includes/class-settings.php:128
+msgid "Show the cookie consent modal to visitors."
+msgstr "訪問者に Cookie 同意モーダルを表示します。"
+
+#: includes/class-settings.php:134
+msgid "Cookie detection mode"
+msgstr "Cookie 検出モード"
+
+#: includes/class-settings.php:141
+msgid "When enabled (and you are logged in as an administrator), browsing the site will detect cookies and add them to the list. New cookies trigger a revision so all visitors must re-accept."
+msgstr "有効にすると（管理者でログイン中）、サイトの閲覧で Cookie が検出されリストに追加されます。新しい Cookie で改訂されるため、すべての訪問者が再同意する必要があります。"
+
+#: includes/class-settings.php:156
+msgid "Hide from guests"
+msgstr "ゲストに非表示"
+
+#: includes/class-settings.php:163
+msgid "When checked, the cookie consent modal is only shown to logged-in users. Guests will not see the banner."
+msgstr "チェックすると、Cookie 同意モーダルはログインしているユーザーにのみ表示されます。ゲストにはバナーが表示されません。"
+
+#: includes/class-settings.php:147
+msgid "Privacy policy URL"
+msgstr "プライバシーポリシー URL"
+
+#: includes/class-settings.php:156
+#: includes/class-settings.php:599
+msgid "Optional. If set, a link to your privacy policy is shown in the consent modal (recommended for GDPR)."
+msgstr "任意。設定すると同意モーダルにプライバシーポリシーへのリンクが表示されます（GDPR 推奨）。"
+
+#: includes/class-settings.php:425
+msgid "Configure how Oven displays the cookie consent banner and detects cookies."
+msgstr "Oven の Cookie 同意バナー表示と Cookie 検出を設定します。"
+
+#: includes/class-settings.php:443
+msgid "Add cookie manually"
+msgstr "Cookie を手動で追加"
+
+#: includes/class-settings.php:444
+msgid "Cookie name"
+msgstr "Cookie 名"
+
+#: includes/class-settings.php:527
+#: includes/class-settings.php:544
+msgid "Essential"
+msgstr "必要"
+
+#: includes/class-settings.php:528
+#: includes/class-settings.php:544
+#: includes/class-user-consent-profile.php:158
+msgid "Non-essential"
+msgstr "任意"
+
+#: includes/class-settings.php:449
+msgid "Optional: script URL to block until consent (non-essential only)"
+msgstr "任意：同意までブロックするスクリプト URL（任意のみ）"
+
+#: includes/class-settings.php:451
+msgid "Optional: description (what this cookie does, shown to visitors)"
+msgstr "任意：説明（この Cookie の用途、訪問者に表示）"
+
+#: includes/class-settings.php:452
+msgid "e.g. Remembers your language preference"
+msgstr "例：言語設定を記憶"
+
+#: includes/class-settings.php:453
+msgid "Add cookie"
+msgstr "Cookie を追加"
+
+#: includes/class-settings.php:456
+msgid "Cookies detected on your site. You can override classification and set a description for each cookie so visitors see what it does in the consent modal."
+msgstr "サイトで検出された Cookie。分類を上書きし、各 Cookie の説明を設定すると、同意モーダルで訪問者に用途が表示されます。"
+
+#: includes/class-settings.php:460
+msgid "Detected cookies list"
+msgstr "検出された Cookie 一覧"
+
+#: includes/class-settings.php:461
+msgid "Description (shown to visitors)"
+msgstr "説明（訪問者に表示）"
+
+#: includes/class-settings.php:461
+msgid "Actions"
+msgstr "操作"
+
+#: includes/class-settings.php:463
+msgid "No cookies detected yet. Enable cookie detection mode and browse your site."
+msgstr "まだ Cookie は検出されていません。Cookie 検出モードを有効にしてサイトを閲覧してください。"
+
+#: includes/class-settings.php:480
+msgid "Revert to auto"
+msgstr "自動に戻す"
+
+#: includes/class-settings.php:500
+msgid "Mark as essential"
+msgstr "必要としてマーク"
+
+#: includes/class-settings.php:502
+msgid "Mark as non-essential"
+msgstr "任意としてマーク"
+
+#: includes/class-settings.php:506
+msgid "overridden"
+msgstr "上書き済み"
+
+#: includes/class-settings.php:508
+msgid "What this cookie does (optional)"
+msgstr "この Cookie の用途（任意）"
+
+#: includes/class-settings.php:508
+msgid "Description for"
+msgstr "説明："
+
+#: includes/class-settings.php:513
+msgid "Save descriptions"
+msgstr "説明を保存"
+
+#: includes/class-settings.php:520
+msgid "Classification by pattern"
+msgstr "パターンで分類"
+
+#: includes/class-settings.php:521
+msgid "Cookies whose name contains the text below will be classified as essential or non-essential. For example, any cookie with \"stripe\" in the name can be marked essential."
+msgstr "名前が以下のテキストを含む Cookie は必要または任意に分類されます。例：「stripe」を含む Cookie は必要とマークできます。"
+
+#: includes/class-settings.php:524
+msgid "Pattern (substring in cookie name)"
+msgstr "パターン（Cookie 名の部分文字列）"
+
+#: includes/class-settings.php:525
+msgid "e.g. stripe"
+msgstr "例：stripe"
+
+#: includes/class-settings.php:526
+msgid "Classification"
+msgstr "分類"
+
+#: includes/class-settings.php:531
+msgid "Add pattern rule"
+msgstr "パターンルールを追加"
+
+#: includes/class-settings.php:534
+msgid "Pattern overrides"
+msgstr "パターン上書き"
+
+#: includes/class-settings.php:534
+msgid "Pattern (contains)"
+msgstr "パターン（含む）"
+
+#: includes/class-settings.php:534
+msgid "Action"
+msgstr "操作"
+
+#: includes/class-settings.php:544
+msgid "Remove"
+msgstr "削除"
+
+#: includes/class-settings.php:548
+msgid "No pattern rules yet."
+msgstr "パターンルールはまだありません。"
+
+#: includes/class-settings.php:554
+msgid "Scripts that set non-essential cookies are blocked until the user opts in. If you mark a cookie as essential above, its script is no longer blocked."
+msgstr "任意 Cookie を設定するスクリプトはユーザーが同意するまでブロックされます。上で Cookie を必要とマークすると、そのスクリプトはブロックされません。"
+
+#: includes/class-settings.php:555
+msgid "Blocked scripts list"
+msgstr "ブロックされたスクリプト一覧"
+
+#: includes/class-settings.php:556
+msgid "Script URL"
+msgstr "スクリプト URL"
+
+#: includes/class-settings.php:556
+msgid "Sets cookies"
+msgstr "Cookie を設定"
+
+#: includes/class-settings.php:608
+msgid "You do not have sufficient permissions to access this page."
+msgstr "このページにアクセスする権限がありません。"
+
+#: includes/class-settings.php:617
+msgid "Save settings"
+msgstr "設定を保存"
+
+#: includes/class-settings.php:632
+msgid "Settings"
+msgstr "設定"
+
+#: includes/class-settings.php:156
+msgid "Detected cookies"
+msgstr "検出された Cookie"
+
+#: includes/class-user-consent-profile.php:70
+msgid "Cookie consent"
+msgstr "Cookie 同意"
+
+#: includes/class-user-consent-profile.php:66
+msgid "No consent recorded for this user. Consent is only stored when the user is logged in and accepts or changes cookie preferences on the site."
+msgstr "このユーザーの同意記録はありません。ログイン中にサイトで Cookie 設定を同意または変更した場合のみ保存されます。"
+
+#: includes/class-user-consent-profile.php:73
+msgid "Current consent"
+msgstr "現在の同意"
+
+#: includes/class-user-consent-profile.php:78
+msgid "Consent history"
+msgstr "同意履歴"
+
+#: includes/class-user-consent-profile.php:79
+msgid "Cookie consent history"
+msgstr "Cookie 同意履歴"
+
+#: includes/class-user-consent-profile.php:81
+msgid "Date"
+msgstr "日付"
+
+#: includes/class-user-consent-profile.php:82
+msgid "Categories accepted"
+msgstr "受け入れたカテゴリ"
+
+#: includes/class-user-consent-profile.php:83
+msgid "Cookies / services accepted"
+msgstr "受け入れた Cookie / サービス"
+
+#: includes/class-user-consent-profile.php:111
+msgid "Last updated"
+msgstr "最終更新"
+
+#: includes/class-user-consent-profile.php:112
+msgid "Categories"
+msgstr "カテゴリ"
+
+#: includes/class-user-consent-profile.php:113
+msgid "Cookies / services"
+msgstr "Cookie / サービス"
+
+#: includes/class-user-consent-profile.php:157
+msgid "Necessary"
+msgstr "必要"
+

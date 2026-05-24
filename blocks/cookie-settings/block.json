@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "oven/cookie-settings",
+	"version": "1.0.7",
+	"title": "Cookie Settings",
+	"category": "theme",
+	"description": "A button that opens the cookie preferences modal so visitors can change their choices.",
+	"textdomain": "oven-cookie-consent",
+	"attributes": {
+		"text": {
+			"type": "string",
+			"default": "Cookie Settings"
+		}
+	},
+	"supports": {
+		"align": true,
+		"className": true,
+		"color": { "text": true, "background": true },
+		"typography": { "fontSize": true }
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

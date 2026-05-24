@@ -1,0 +1,241 @@
+/**
+ * Oven: cookie consent modal overrides.
+ * - Light mode: ensure readable text; theme-resistant with !important.
+ * - Dark mode: follow system (class added in JS); theme-resistant with !important.
+ * - Mobile: safe-area insets for notched devices.
+ */
+
+/* -------------------------------------------------------------------------
+   Light mode: force readable colors so themes don't override.
+   ------------------------------------------------------------------------- */
+#cc-main:not(.cc--darkmode),
+#cc-main:not(.cc--darkmode) .cm,
+#cc-main:not(.cc--darkmode) .pm,
+#cc-main:not(.cc--darkmode) .pm *,
+#cc-main:not(.cc--darkmode) .cm * {
+	color: #2c2f31 !important;
+}
+#cc-main:not(.cc--darkmode) .cm__desc,
+#cc-main:not(.cc--darkmode) .pm__section-desc,
+#cc-main:not(.cc--darkmode) .pm__section-desc-wrapper,
+#cc-main:not(.cc--darkmode) .pm__service-title,
+#cc-main:not(.cc--darkmode) .pm__table-td,
+#cc-main:not(.cc--darkmode) .pm__table-th {
+	color: #2c2f31 !important;
+}
+#cc-main:not(.cc--darkmode) .pm__title,
+#cc-main:not(.cc--darkmode) .pm__section-title {
+	color: #2c2f31 !important;
+}
+#cc-main:not(.cc--darkmode) .pm__badge {
+	background: #eaeff2 !important;
+	border-color: #eaeff2 !important;
+	color: #2c2f31 !important;
+}
+#cc-main:not(.cc--darkmode) .pm__btn--secondary,
+#cc-main:not(.cc--darkmode) .cm__btn--secondary {
+	background: #eaeff2 !important;
+	border-color: #eaeff2 !important;
+	color: #2c2f31 !important;
+}
+#cc-main:not(.cc--darkmode) .cm,
+#cc-main:not(.cc--darkmode) .pm {
+	background: #fff !important;
+}
+#cc-main:not(.cc--darkmode) .pm__btn--secondary:hover,
+#cc-main:not(.cc--darkmode) .cm__btn--secondary:hover {
+	background: #d4dae0 !important;
+	border-color: #d4dae0 !important;
+	color: #000 !important;
+}
+/* Primary buttons (Accept all, Essential only): white text so themes cannot override. */
+#cc-main:not(.cc--darkmode) .pm__btn:not(.pm__btn--secondary),
+#cc-main:not(.cc--darkmode) .cm__btn:not(.cm__btn--secondary),
+#cc-main:not(.cc--darkmode) .pm__btn:not(.pm__btn--secondary) span,
+#cc-main:not(.cc--darkmode) .cm__btn:not(.cm__btn--secondary) span {
+	color: #fff !important;
+}
+#cc-main:not(.cc--darkmode) .pm__btn:not(.pm__btn--secondary):hover,
+#cc-main:not(.cc--darkmode) .cm__btn:not(.cm__btn--secondary):hover,
+#cc-main:not(.cc--darkmode) .pm__btn:not(.pm__btn--secondary):hover span,
+#cc-main:not(.cc--darkmode) .cm__btn:not(.cm__btn--secondary):hover span {
+	color: #fff !important;
+}
+/* Preferences modal close (X) button: ensure icon is visible (override base reset on span/svg). */
+#cc-main:not(.cc--darkmode) .pm__close-btn {
+	background: #eaeff2 !important;
+	border-color: #d4dae0 !important;
+}
+#cc-main:not(.cc--darkmode) .pm__close-btn span {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+#cc-main:not(.cc--darkmode) .pm__close-btn svg,
+#cc-main:not(.cc--darkmode) .pm__close-btn svg * {
+	display: block !important;
+	width: 24px !important;
+	height: 24px !important;
+	stroke: #2c2f31 !important;
+	stroke-width: 2.5 !important;
+	fill: none !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+#cc-main:not(.cc--darkmode) .pm__close-btn:hover svg,
+#cc-main:not(.cc--darkmode) .pm__close-btn:hover svg * {
+	stroke: #161a1c !important;
+}
+
+/* -------------------------------------------------------------------------
+   Dark mode: ensure theme cannot override (class .cc--darkmode added by JS from prefers-color-scheme).
+   ------------------------------------------------------------------------- */
+#cc-main.cc--darkmode,
+#cc-main.cc--darkmode .cm,
+#cc-main.cc--darkmode .pm,
+#cc-main.cc--darkmode .pm *,
+#cc-main.cc--darkmode .cm * {
+	color: #ebf3f6 !important;
+}
+#cc-main.cc--darkmode .cm__desc,
+#cc-main.cc--darkmode .pm__section-desc,
+#cc-main.cc--darkmode .pm__section-desc-wrapper,
+#cc-main.cc--darkmode .pm__service-title,
+#cc-main.cc--darkmode .pm__table-td,
+#cc-main.cc--darkmode .pm__table-th {
+	color: #aebbc5 !important;
+}
+#cc-main.cc--darkmode .pm__title,
+#cc-main.cc--darkmode .pm__section-title {
+	color: #ebf3f6 !important;
+}
+#cc-main.cc--darkmode .cm,
+#cc-main.cc--darkmode .pm {
+	background: #161a1c !important;
+}
+#cc-main.cc--darkmode .pm__badge {
+	background: #242c31 !important;
+	border-color: #242c31 !important;
+	color: #ebf3f6 !important;
+}
+#cc-main.cc--darkmode .pm__btn--secondary,
+#cc-main.cc--darkmode .cm__btn--secondary {
+	background: #242c31 !important;
+	border-color: #242c31 !important;
+	color: #ebf3f6 !important;
+}
+#cc-main.cc--darkmode .pm__btn--secondary:hover,
+#cc-main.cc--darkmode .cm__btn--secondary:hover {
+	background: #353d43 !important;
+	border-color: #353d43 !important;
+	color: #fff !important;
+}
+#cc-main.cc--darkmode .cm__btn:not(.cm__btn--secondary),
+#cc-main.cc--darkmode .pm__btn:not(.pm__btn--secondary) {
+	background: #525f6b !important;
+	border-color: #525f6b !important;
+	color: #fff !important;
+}
+#cc-main.cc--darkmode .cm__btn:not(.cm__btn--secondary) span,
+#cc-main.cc--darkmode .pm__btn:not(.pm__btn--secondary) span {
+	color: #fff !important;
+}
+#cc-main.cc--darkmode .cm__btn:not(.cm__btn--secondary):hover,
+#cc-main.cc--darkmode .pm__btn:not(.pm__btn--secondary):hover {
+	background: #3d4750 !important;
+	border-color: #3d4750 !important;
+	color: #fff !important;
+}
+#cc-main.cc--darkmode .cm__btn:not(.cm__btn--secondary):hover span,
+#cc-main.cc--darkmode .pm__btn:not(.pm__btn--secondary):hover span {
+	color: #fff !important;
+}
+/* Preferences modal close (X) button in dark mode. */
+#cc-main.cc--darkmode .pm__close-btn {
+	background: #242c31 !important;
+	border-color: #353d43 !important;
+}
+#cc-main.cc--darkmode .pm__close-btn span {
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 100% !important;
+	height: 100% !important;
+}
+#cc-main.cc--darkmode .pm__close-btn svg,
+#cc-main.cc--darkmode .pm__close-btn svg * {
+	display: block !important;
+	width: 24px !important;
+	height: 24px !important;
+	stroke: #ebf3f6 !important;
+	stroke-width: 2.5 !important;
+	fill: none !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+#cc-main.cc--darkmode .pm__close-btn:hover svg,
+#cc-main.cc--darkmode .pm__close-btn:hover svg * {
+	stroke: #fff !important;
+}
+
+/* Section titles: prevent expand arrow from overlapping "Essential cookies" / "Non-essential cookies" text. */
+#cc-main .pm__section--expandable .pm__section-title {
+	padding-left: 3.5em !important;
+}
+
+/* Custom close button for preferences modal (always visible; does not rely on SVG). */
+#cc-main .oven-pm-close {
+	align-items: center !important;
+	background: #eaeff2 !important;
+	border: 1px solid #d4dae0 !important;
+	border-radius: 0.4rem !important;
+	color: #2c2f31 !important;
+	cursor: pointer !important;
+	display: flex !important;
+	flex-shrink: 0 !important;
+	font-size: 1.25rem !important;
+	font-weight: 600 !important;
+	height: 40px !important;
+	justify-content: center !important;
+	line-height: 1 !important;
+	margin-left: 0.5em !important;
+	min-width: 40px !important;
+	padding: 0 !important;
+	width: 40px !important;
+}
+#cc-main .oven-pm-close img {
+	width: 24px !important;
+	height: 24px !important;
+	display: block !important;
+	pointer-events: none !important;
+}
+#cc-main .oven-pm-close:hover {
+	background: #d4dae0 !important;
+	color: #161a1c !important;
+}
+#cc-main.cc--darkmode .oven-pm-close img {
+	filter: invert(1) !important;
+}
+#cc-main.cc--darkmode .oven-pm-close {
+	background: #242c31 !important;
+	border-color: #353d43 !important;
+	color: #ebf3f6 !important;
+}
+#cc-main.cc--darkmode .oven-pm-close:hover {
+	background: #353d43 !important;
+	color: #fff !important;
+}
+
+/* -------------------------------------------------------------------------
+   Mobile: safe-area insets so consent bar sits above notches / home indicator.
+   ------------------------------------------------------------------------- */
+@media screen and (max-width: 640px) {
+	#cc-main .cm.cm--bottom {
+		bottom: max(0.5em, env(safe-area-inset-bottom, 0px)) !important;
+	}
+	#cc-main .pm {
+		padding-bottom: env(safe-area-inset-bottom, 0) !important;
+	}
+}

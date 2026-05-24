@@ -1,0 +1,362 @@
+# Copyright (C) 2025 Oven
+# This file is distributed under the same license as the Oven package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Oven 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-25 12:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+#: includes/class-cookie-manager.php:219
+msgid "Required for site functionality (e.g. login, preferences)."
+msgstr "Necessaria per il funzionamento del sito (es. accesso, preferenze)."
+
+#: includes/class-cookie-manager.php:249
+msgid "Name"
+msgstr "Nome"
+
+#: includes/class-cookie-manager.php:250
+msgid "Description"
+msgstr "Descrizione"
+
+#: includes/class-frontend.php:152
+msgid "Currently, all cookies we use are essential for the website to operate. We do not use cookies to track you outside of this website. We care about your privacy. ❤️"
+msgstr "Attualmente tutti i cookie che utilizziamo sono essenziali per il funzionamento del sito. Non usiamo cookie per tracciarti fuori da questo sito. La tua privacy ci sta a cuore. ❤️"
+
+#: includes/class-frontend.php:180
+msgid "We use cookies to ensure the site works and to improve your experience. You can accept all, only essential, or manage preferences."
+msgstr "Utilizziamo cookie per far funzionare il sito e migliorare la tua esperienza. Puoi accettare tutti, solo gli essenziali o gestire le preferenze."
+
+#: includes/class-frontend.php:186
+msgid "Privacy policy"
+msgstr "Informativa sulla privacy"
+
+#: includes/class-frontend.php:190
+msgid "We use cookies"
+msgstr "Utilizziamo cookie"
+
+#: includes/class-frontend.php:192
+msgid "Accept all"
+msgstr "Accetta tutti"
+
+#: includes/class-frontend.php:193
+msgid "Essential only"
+msgstr "Solo essenziali"
+
+#: includes/class-frontend.php:194
+msgid "Manage preferences"
+msgstr "Gestisci preferenze"
+
+#: includes/class-frontend.php:195
+msgid "Cookie preferences"
+msgstr "Preferenze cookie"
+
+#: includes/class-frontend.php:196
+msgid "Save preferences"
+msgstr "Salva preferenze"
+
+#: includes/class-frontend.php:197
+msgid "Close"
+msgstr "Chiudi"
+
+#: includes/class-frontend.php:198
+msgid "Essential cookies"
+msgstr "Cookie essenziali"
+
+#: includes/class-frontend.php:199
+msgid "These cookies are required for the website to function (e.g. login, security, preferences)."
+msgstr "Questi cookie sono necessari per il funzionamento del sito (es. accesso, sicurezza, preferenze)."
+
+#: includes/class-frontend.php:200
+msgid "Non-essential cookies"
+msgstr "Cookie non essenziali"
+
+#: includes/class-frontend.php:201
+msgid "These cookies are used for analytics or third-party features. You can disable them."
+msgstr "Questi cookie sono utilizzati per analisi o funzionalità di terze parti. Puoi disabilitarli."
+
+#: includes/class-frontend.php:202
+msgid "We have updated our cookie policy. Please review and accept again."
+msgstr "Abbiamo aggiornato la nostra politica sui cookie. Rivedi e accetta di nuovo."
+
+#: includes/class-rest-controller.php:140
+msgid "Login required."
+msgstr "Accesso richiesto."
+
+#: includes/class-rest-controller.php:186
+msgid "Security check failed."
+msgstr "Controllo di sicurezza fallito."
+
+#: includes/class-rest-controller.php:152
+msgid "Not allowed."
+msgstr "Non consentito."
+
+#: includes/class-rest-controller.php:190
+msgid "Not logged in."
+msgstr "Non connesso."
+
+#: includes/class-rest-controller.php:197
+msgid "Invalid consent data."
+msgstr "Dati di consenso non validi."
+
+#: includes/class-settings.php:90
+msgid "Oven Cookie Consent"
+msgstr "Oven - Consenso cookie"
+
+#: includes/class-settings.php:91
+msgid "Oven"
+msgstr "Oven"
+
+#: includes/class-settings.php:113
+msgid "Cookie Consent"
+msgstr "Consenso cookie"
+
+#: includes/class-settings.php:121
+msgid "Enable cookie consent"
+msgstr "Abilita consenso cookie"
+
+#: includes/class-settings.php:128
+msgid "Show the cookie consent modal to visitors."
+msgstr "Mostra il modale di consenso cookie ai visitatori."
+
+#: includes/class-settings.php:134
+msgid "Cookie detection mode"
+msgstr "Modalità rilevamento cookie"
+
+#: includes/class-settings.php:141
+msgid "When enabled (and you are logged in as an administrator), browsing the site will detect cookies and add them to the list. New cookies trigger a revision so all visitors must re-accept."
+msgstr "Quando attivata (e sei connesso come amministratore), la navigazione sul sito rileverà i cookie e li aggiungerà all'elenco. I nuovi cookie attivano una revisione quindi tutti i visitatori devono accettare di nuovo."
+
+#: includes/class-settings.php:156
+msgid "Hide from guests"
+msgstr "Nascondi agli ospiti"
+
+#: includes/class-settings.php:163
+msgid "When checked, the cookie consent modal is only shown to logged-in users. Guests will not see the banner."
+msgstr "Se selezionato, il modale di consenso ai cookie viene mostrato solo agli utenti connessi. Gli ospiti non vedranno il banner."
+
+#: includes/class-settings.php:147
+msgid "Privacy policy URL"
+msgstr "URL informativa privacy"
+
+#: includes/class-settings.php:156
+#: includes/class-settings.php:599
+msgid "Optional. If set, a link to your privacy policy is shown in the consent modal (recommended for GDPR)."
+msgstr "Opzionale. Se impostato, nel modale di consenso viene mostrato un link alla tua informativa sulla privacy (consigliato per il GDPR)."
+
+#: includes/class-settings.php:425
+msgid "Configure how Oven displays the cookie consent banner and detects cookies."
+msgstr "Configura come Oven mostra il banner di consenso cookie e rileva i cookie."
+
+#: includes/class-settings.php:443
+msgid "Add cookie manually"
+msgstr "Aggiungi cookie manualmente"
+
+#: includes/class-settings.php:444
+msgid "Cookie name"
+msgstr "Nome cookie"
+
+#: includes/class-settings.php:527
+#: includes/class-settings.php:544
+msgid "Essential"
+msgstr "Essenziale"
+
+#: includes/class-settings.php:528
+#: includes/class-settings.php:544
+#: includes/class-user-consent-profile.php:158
+msgid "Non-essential"
+msgstr "Non essenziale"
+
+#: includes/class-settings.php:449
+msgid "Optional: script URL to block until consent (non-essential only)"
+msgstr "Opzionale: URL script da bloccare fino al consenso (solo non essenziali)"
+
+#: includes/class-settings.php:451
+msgid "Optional: description (what this cookie does, shown to visitors)"
+msgstr "Opzionale: descrizione (cosa fa questo cookie, mostrata ai visitatori)"
+
+#: includes/class-settings.php:452
+msgid "e.g. Remembers your language preference"
+msgstr "es. Ricorda la tua preferenza di lingua"
+
+#: includes/class-settings.php:453
+msgid "Add cookie"
+msgstr "Aggiungi cookie"
+
+#: includes/class-settings.php:456
+msgid "Cookies detected on your site. You can override classification and set a description for each cookie so visitors see what it does in the consent modal."
+msgstr "Cookie rilevati sul tuo sito. Puoi sovrascrivere la classificazione e impostare una descrizione per ogni cookie così i visitatori vedono a cosa serve nel modale di consenso."
+
+#: includes/class-settings.php:460
+msgid "Detected cookies list"
+msgstr "Elenco cookie rilevati"
+
+#: includes/class-settings.php:461
+msgid "Description (shown to visitors)"
+msgstr "Descrizione (mostrata ai visitatori)"
+
+#: includes/class-settings.php:461
+msgid "Actions"
+msgstr "Azioni"
+
+#: includes/class-settings.php:463
+msgid "No cookies detected yet. Enable cookie detection mode and browse your site."
+msgstr "Nessun cookie rilevato ancora. Abilita la modalità di rilevamento cookie e naviga sul tuo sito."
+
+#: includes/class-settings.php:480
+msgid "Revert to auto"
+msgstr "Ripristina automatico"
+
+#: includes/class-settings.php:500
+msgid "Mark as essential"
+msgstr "Marca come essenziale"
+
+#: includes/class-settings.php:502
+msgid "Mark as non-essential"
+msgstr "Marca come non essenziale"
+
+#: includes/class-settings.php:506
+msgid "overridden"
+msgstr "sovrascritto"
+
+#: includes/class-settings.php:508
+msgid "What this cookie does (optional)"
+msgstr "Cosa fa questo cookie (opzionale)"
+
+#: includes/class-settings.php:508
+msgid "Description for"
+msgstr "Descrizione per"
+
+#: includes/class-settings.php:513
+msgid "Save descriptions"
+msgstr "Salva descrizioni"
+
+#: includes/class-settings.php:520
+msgid "Classification by pattern"
+msgstr "Classificazione per modello"
+
+#: includes/class-settings.php:521
+msgid "Cookies whose name contains the text below will be classified as essential or non-essential. For example, any cookie with \"stripe\" in the name can be marked essential."
+msgstr "I cookie il cui nome contiene il testo sotto saranno classificati come essenziali o non essenziali. Ad esempio, qualsiasi cookie con \"stripe\" nel nome può essere marcato essenziale."
+
+#: includes/class-settings.php:524
+msgid "Pattern (substring in cookie name)"
+msgstr "Modello (sottostringa nel nome cookie)"
+
+#: includes/class-settings.php:525
+msgid "e.g. stripe"
+msgstr "es. stripe"
+
+#: includes/class-settings.php:526
+msgid "Classification"
+msgstr "Classificazione"
+
+#: includes/class-settings.php:531
+msgid "Add pattern rule"
+msgstr "Aggiungi regola modello"
+
+#: includes/class-settings.php:534
+msgid "Pattern overrides"
+msgstr "Sovrascritture modello"
+
+#: includes/class-settings.php:534
+msgid "Pattern (contains)"
+msgstr "Modello (contiene)"
+
+#: includes/class-settings.php:534
+msgid "Action"
+msgstr "Azione"
+
+#: includes/class-settings.php:544
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: includes/class-settings.php:548
+msgid "No pattern rules yet."
+msgstr "Nessuna regola modello ancora."
+
+#: includes/class-settings.php:554
+msgid "Scripts that set non-essential cookies are blocked until the user opts in. If you mark a cookie as essential above, its script is no longer blocked."
+msgstr "Gli script che impostano cookie non essenziali sono bloccati finché l'utente non acconsente. Se segni un cookie come essenziale sopra, il suo script non sarà più bloccato."
+
+#: includes/class-settings.php:555
+msgid "Blocked scripts list"
+msgstr "Elenco script bloccati"
+
+#: includes/class-settings.php:556
+msgid "Script URL"
+msgstr "URL script"
+
+#: includes/class-settings.php:556
+msgid "Sets cookies"
+msgstr "Imposta cookie"
+
+#: includes/class-settings.php:608
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Non hai i permessi sufficienti per accedere a questa pagina."
+
+#: includes/class-settings.php:617
+msgid "Save settings"
+msgstr "Salva impostazioni"
+
+#: includes/class-settings.php:632
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: includes/class-settings.php:156
+msgid "Detected cookies"
+msgstr "Cookie rilevati"
+
+#: includes/class-user-consent-profile.php:70
+msgid "Cookie consent"
+msgstr "Consenso cookie"
+
+#: includes/class-user-consent-profile.php:66
+msgid "No consent recorded for this user. Consent is only stored when the user is logged in and accepts or changes cookie preferences on the site."
+msgstr "Nessun consenso registrato per questo utente. Il consenso viene memorizzato solo quando l'utente è connesso e accetta o modifica le preferenze cookie sul sito."
+
+#: includes/class-user-consent-profile.php:73
+msgid "Current consent"
+msgstr "Consenso attuale"
+
+#: includes/class-user-consent-profile.php:78
+msgid "Consent history"
+msgstr "Cronologia consensi"
+
+#: includes/class-user-consent-profile.php:79
+msgid "Cookie consent history"
+msgstr "Cronologia consenso cookie"
+
+#: includes/class-user-consent-profile.php:81
+msgid "Date"
+msgstr "Data"
+
+#: includes/class-user-consent-profile.php:82
+msgid "Categories accepted"
+msgstr "Categorie accettate"
+
+#: includes/class-user-consent-profile.php:83
+msgid "Cookies / services accepted"
+msgstr "Cookie / servizi accettati"
+
+#: includes/class-user-consent-profile.php:111
+msgid "Last updated"
+msgstr "Ultimo aggiornamento"
+
+#: includes/class-user-consent-profile.php:112
+msgid "Categories"
+msgstr "Categorie"
+
+#: includes/class-user-consent-profile.php:113
+msgid "Cookies / services"
+msgstr "Cookie / servizi"
+
+#: includes/class-user-consent-profile.php:157
+msgid "Necessary"
+msgstr "Necessari"
+

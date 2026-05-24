@@ -1,0 +1,10 @@
+/.git
+/.github
+/.cursor
+.distignore
+.DS_Store
+**/.DS_Store
+/languages/*.py
+/languages/__pycache__
+/languages/build-locales.py
+/languages/translations_data.py
