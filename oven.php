@@ -3,7 +3,7 @@
  * Plugin Name: Oven Cookie Consent
  * Plugin URI: https://wilcosky.com/oven
  * Description: Cookie consent with detection, essential/non-essential classification, and re-consent on policy changes. Uses CookieConsent library.
- * Version: 1.0.7
+ * Version: 1.0.9
  * Requires at least: 5.9
  * Requires PHP: 7.4
  * Author: Billy Wilcosky
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'OVEN_VERSION', '1.0.7' );
+define( 'OVEN_VERSION', '1.0.9' );
 define( 'OVEN_PLUGIN_FILE', __FILE__ );
 define( 'OVEN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'OVEN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

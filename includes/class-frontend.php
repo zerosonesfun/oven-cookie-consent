@@ -64,29 +64,49 @@ class Frontend {
 	}
 
 	/**
-	 * Register dummy head scripts and attach inline JS (printed early in wp_head via wp_print_scripts).
+	 * Register head bootstrap scripts (printed early in wp_head via wp_print_scripts).
 	 */
 	public function enqueue_head_inline_scripts(): void {
 		if ( is_admin() ) {
 			return;
 		}
 
-		$js = $this->get_cookie_tracer_inline_js();
-		if ( $js !== '' ) {
-			$this->register_enqueue_inline_script( self::SCRIPT_COOKIE_TRACER, $js );
+		if ( $this->should_enqueue_cookie_tracer() ) {
+			$this->register_enqueue_head_script(
+				self::SCRIPT_COOKIE_TRACER,
+				'assets/js/oven-cookie-tracer.js',
+				'ovenCookieTracer',
+				array(
+					'consentCookieName' => 'oven_cc',
+				)
+			);
 		}
 
-		if ( $this->settings->is_enabled() ) {
-			$clear_js = $this->get_clear_rejected_cookies_inline_js();
-			if ( $clear_js !== '' ) {
-				$this->register_enqueue_inline_script( self::SCRIPT_CLEAR_REJECTED, $clear_js );
-			}
+		if ( ! $this->settings->is_enabled() ) {
+			return;
+		}
 
-			if ( is_user_logged_in() ) {
-				$logged_js = $this->get_logged_in_consent_inline_js();
-				if ( $logged_js !== '' ) {
-					$this->register_enqueue_inline_script( self::SCRIPT_LOGGED_IN_CONSENT_BOOT, $logged_js );
-				}
+		$to_clear = $this->cookie_manager->get_cookies_to_clear();
+		if ( ! empty( $to_clear ) ) {
+			$this->register_enqueue_head_script(
+				self::SCRIPT_CLEAR_REJECTED,
+				'assets/js/oven-clear-rejected-cookies.js',
+				'ovenClearRejected',
+				array(
+					'names' => array_map( 'sanitize_text_field', array_values( $to_clear ) ),
+				)
+			);
+		}
+
+		if ( is_user_logged_in() ) {
+			$config = $this->get_logged_in_consent_config();
+			if ( $config !== null ) {
+				$this->register_enqueue_head_script(
+					self::SCRIPT_LOGGED_IN_CONSENT_BOOT,
+					'assets/js/oven-logged-in-consent.js',
+					'ovenLoggedInConsent',
+					$config
+				);
 			}
 		}
 	}
@@ -122,15 +142,29 @@ class Frontend {
 	}
 
 	/**
-	 * Register a no-src script, enqueue it, attach inline JS.
+	 * Register, localize, and enqueue a head bootstrap script file.
 	 *
-	 * @param string $handle Script handle.
-	 * @param string $inline JavaScript contents (no script tags).
+	 * @param string               $handle        Script handle.
+	 * @param string               $relative_path Path under plugin directory.
+	 * @param string               $object_name   Global JS object name for wp_localize_script.
+	 * @param array<string, mixed> $data          Localized data (JSON-encoded by WordPress).
 	 */
-	private function register_enqueue_inline_script( string $handle, string $inline ): void {
-		wp_register_script( $handle, false, array(), OVEN_VERSION, false );
+	private function register_enqueue_head_script( string $handle, string $relative_path, string $object_name, array $data ): void {
+		$url = OVEN_PLUGIN_URL . $relative_path;
+		wp_register_script( $handle, $url, array(), $this->asset_version( $relative_path ), false );
+		wp_localize_script( $handle, $object_name, $data );
 		wp_enqueue_script( $handle );
-		wp_add_inline_script( $handle, $inline, 'after' );
+	}
+
+	/**
+	 * Whether the cookie detection tracer should load (administrators in detection mode).
+	 *
+	 * @return bool
+	 */
+	private function should_enqueue_cookie_tracer(): bool {
+		return $this->settings->is_enabled()
+			&& $this->settings->is_detection_mode()
+			&& current_user_can( 'manage_options' );
 	}
 
 	/**
@@ -326,48 +360,29 @@ class Frontend {
 	}
 
 	/**
-	 * Build inline JS for earliest cookie setter tracing (detection mode, administrators only).
+	 * Config for oven-logged-in-consent.js (wp_localize_script).
+	 *
+	 * @return array<string, mixed>|null Null if bootstrap should not run.
 	 */
-	private function get_cookie_tracer_inline_js(): string {
-		if ( ! $this->settings->is_enabled() ) {
-			return '';
-		}
-		if ( ! $this->settings->is_detection_mode() || ! current_user_can( 'manage_options' ) ) {
-			return '';
-		}
-		$cname = wp_json_encode( 'oven_cc' ); // Literal for JS comparison.
-
-		return '(function(){window._ovenCookieScriptMap={};try{var d=document;var origDesc=Object.getOwnPropertyDescriptor(Document.prototype,\'cookie\')||Object.getOwnPropertyDescriptor(d,\'cookie\');if(!origDesc||!origDesc.set)return;var set=origDesc.set;Object.defineProperty(d,\'cookie\',{set:function(v){if(typeof v===\'string\'){var name=v.split(\'=\')[0].trim();if(name&&name!==' . $cname . '){try{var err=new Error();var stack=err.stack||\'\';var lines=stack.split(\'\\n\');for(var i=0;i<lines.length;i++){var line=lines[i];var match=line.match(/(https?:\\/\\/[^\\s\\)]+\\.js)/);if(match){window._ovenCookieScriptMap[name]=match[1];break;}}}catch(e){}}}return set.call(this,v)},get:origDesc.get,configurable:true,enumerable:origDesc.enumerable});}catch(e){}})();';
-	}
-
-	/**
-	 * Build inline JS to clear rejected non-essential cookies early in document head.
-	 */
-	private function get_clear_rejected_cookies_inline_js(): string {
-		$to_clear = $this->cookie_manager->get_cookies_to_clear();
-		if ( empty( $to_clear ) ) {
-			return '';
-		}
-		$names_js = wp_json_encode( array_values( $to_clear ) );
-
-		return '(function(){var names=' . $names_js . ";var path='; path=/';var exp='; expires=Thu, 01 Jan 1970 00:00:01 GMT';var host=typeof location!=='undefined'&&location.hostname||'';for(var i=0;i<names.length;i++){var n=names[i];if(typeof n!=='string'||!n)continue;document.cookie=n+'='+path+exp;if(host&&host.indexOf('.')!==-1){document.cookie=n+'='+path+'; domain='+host+exp;document.cookie=n+'='+path+'; domain=.'+host+exp;}}})();";
-	}
-
-	/**
-	 * Build inline JS for logged-in consent cookie bootstrap (one branch per request).
-	 */
-	private function get_logged_in_consent_inline_js(): string {
+	private function get_logged_in_consent_config(): ?array {
 		$revision    = $this->settings->get_revision();
 		$cookie_name = 'oven_cc';
+		$base        = array(
+			'cookieName'        => $cookie_name,
+			'sessionCookieName' => self::SESSION_VERIFIED_COOKIE,
+			'secureSuffix'      => is_ssl() ? '; Secure' : '',
+		);
 
 		$from_sess = $this->get_consent_from_session_cookie( $revision, get_current_user_id() );
 		if ( $from_sess !== null ) {
-			return $this->build_set_consent_cookies_js(
-				$cookie_name,
-				$from_sess['value'],
-				$from_sess['expires_sec'],
-				null,
-				null
+			return array_merge(
+				$base,
+				array(
+					'mode'            => 'set',
+					'cookieValue'     => $from_sess['value'],
+					'expiresSec'      => $from_sess['expires_sec'],
+					'sessionPayload'  => '',
+				)
 			);
 		}
 
@@ -377,36 +392,62 @@ class Frontend {
 		if ( ! is_array( $stored ) || (int) ( $stored['revision'] ?? 0 ) !== $revision ) {
 			$from_request = $this->get_consent_from_request_cookie( $cookie_name, $revision );
 			if ( $from_request !== null ) {
-				return $this->build_sync_consent_from_request_cookie_js(
-					$cookie_name,
-					$from_request['value'],
-					$from_request['decoded']
-				);
+				return $this->build_logged_in_sync_config( $base, $from_request );
 			}
-			return $this->build_clear_consent_cookies_js();
+			return array_merge( $base, array( 'mode' => 'clear' ) );
 		}
 
 		$cookie_value = $this->build_cookie_value_from_user_meta( $stored );
 		if ( $cookie_value === null ) {
 			$from_request = $this->get_consent_from_request_cookie( $cookie_name, $revision );
 			if ( $from_request !== null ) {
-				return $this->build_sync_consent_from_request_cookie_js(
-					$cookie_name,
-					$from_request['value'],
-					$from_request['decoded']
-				);
+				return $this->build_logged_in_sync_config( $base, $from_request );
 			}
-			return $this->build_clear_consent_cookies_js();
+			return array_merge( $base, array( 'mode' => 'clear' ) );
 		}
 
 		$expires     = (int) ( $stored['expirationTime'] ?? 0 );
 		$expires_sec = $expires > 0 ? (int) floor( $expires / 1000 ) : 0;
-		return $this->build_set_consent_cookies_js(
-			$cookie_name,
-			$cookie_value,
-			$expires_sec,
-			$revision,
-			$user_id
+		$session     = base64_encode(
+			(string) wp_json_encode(
+				array(
+					'r' => $revision,
+					'v' => $cookie_value,
+					'e' => $expires_sec,
+					'u' => $user_id,
+				)
+			)
+		);
+
+		return array_merge(
+			$base,
+			array(
+				'mode'           => 'set',
+				'cookieValue'    => $cookie_value,
+				'expiresSec'     => $expires_sec,
+				'sessionPayload' => $session !== false ? $session : '',
+			)
+		);
+	}
+
+	/**
+	 * @param array<string, mixed>                                    $base         Shared config keys.
+	 * @param array{value: string, decoded: array<string, mixed>} $from_request Request cookie data.
+	 * @return array<string, mixed>
+	 */
+	private function build_logged_in_sync_config( array $base, array $from_request ): array {
+		$decoded     = $from_request['decoded'];
+		$expires     = (int) ( $decoded['expirationTime'] ?? 0 );
+		$expires_sec = $expires > 0 ? (int) floor( $expires / 1000 ) : 0;
+
+		return array_merge(
+			$base,
+			array(
+				'mode'        => 'sync',
+				'cookieValue' => $from_request['value'],
+				'expiresSec'  => $expires_sec,
+				'syncPayload' => $decoded,
+			)
 		);
 	}
 
@@ -467,9 +508,6 @@ class Frontend {
 	 * @return array{value: string, expires_sec: int}|null
 	 */
 	private function get_consent_from_session_cookie( int $revision, int $user_id ): ?array {
-		if ( empty( $_COOKIE[ self::SESSION_VERIFIED_COOKIE ] ) || ! is_string( $_COOKIE[ self::SESSION_VERIFIED_COOKIE ] ) ) {
-			return null;
-		}
 		$raw = Consent_Sanitizer::get_cookie_value( self::SESSION_VERIFIED_COOKIE );
 		if ( $raw === '' ) {
 			return null;
@@ -497,35 +535,11 @@ class Frontend {
 			return null;
 		}
 		$expires_sec = isset( $decoded['e'] ) ? max( 0, (int) $decoded['e'] ) : 0;
-		return array( 'value' => $cookie_value, 'expires_sec' => $expires_sec );
-	}
-
-	/**
-	 * Build JS that sets consent (and optionally session verification) cookies.
-	 *
-	 * @param string      $cookie_name   Cookie name (oven_cc).
-	 * @param string      $cookie_value  JSON consent value.
-	 * @param int         $expires_sec   Expiry in seconds for oven_cc.
-	 * @param int|null    $revision      If set with user_id, sets session cookie.
-	 * @param int|null    $user_id       If set with revision, stored in session cookie.
-	 */
-	private function build_set_consent_cookies_js( string $cookie_name, string $cookie_value, int $expires_sec, ?int $revision = null, ?int $user_id = null ): string {
-		$secure_attr = is_ssl() ? '; Secure' : '';
-		$sess_cookie  = ( $revision !== null && $user_id !== null )
-			? base64_encode( wp_json_encode( array( 'r' => $revision, 'v' => $cookie_value, 'e' => $expires_sec, 'u' => $user_id ) ) )
-			: '';
-
-		$js  = '(function(){var n=' . wp_json_encode( $cookie_name ) . ';var v=' . wp_json_encode( $cookie_value ) . ';';
-		$js .= 'var exp=' . (string) (int) $expires_sec . ';';
-		$js .= 'var s=exp?\'; expires=\'+(new Date(exp*1000).toUTCString()):\'\';';
-		$js .= 'var sec=' . wp_json_encode( $secure_attr ) . ';';
-		$js .= 'document.cookie=n+\'=\'+encodeURIComponent(v)+\'; path=/; SameSite=Lax\'+s+sec;';
-		if ( $sess_cookie !== '' ) {
-			$js .= 'var sess=' . wp_json_encode( $sess_cookie ) . ';';
-			$js .= 'document.cookie=' . wp_json_encode( self::SESSION_VERIFIED_COOKIE ) . '+\'=\'+encodeURIComponent(sess)+\'; path=/; SameSite=Lax\'+sec;';
+		$encoded     = wp_json_encode( $sanitized_consent );
+		if ( ! is_string( $encoded ) || $encoded === '' ) {
+			return null;
 		}
-		$js .= '})();';
-		return $js;
+		return array( 'value' => $encoded, 'expires_sec' => $expires_sec );
 	}
 
 	/**
@@ -548,49 +562,10 @@ class Frontend {
 		if ( (int) $sanitized['revision'] !== $revision ) {
 			return null;
 		}
-		return array( 'value' => $raw, 'decoded' => $sanitized );
-	}
-
-	/**
-	 * Build JS that sets consent from request cookie and exposes sync payload for footer script.
-	 *
-	 * @param string               $cookie_name Cookie name.
-	 * @param string               $cookie_value Raw cookie value (JSON string).
-	 * @param array<string, mixed> $decoded Decoded consent for sync.
-	 */
-	private function build_sync_consent_from_request_cookie_js( string $cookie_name, string $cookie_value, array $decoded ): string {
-		$expires     = (int) ( $decoded['expirationTime'] ?? 0 );
-		$expires_sec = $expires > 0 ? (int) floor( $expires / 1000 ) : 0;
-		$secure_attr = is_ssl() ? '; Secure' : '';
-
-		$js  = '(function(){var n=' . wp_json_encode( $cookie_name ) . ';var v=' . wp_json_encode( $cookie_value ) . ';';
-		$js .= 'var exp=' . (string) $expires_sec . ';';
-		$js .= 'var s=exp?\'; expires=\'+(new Date(exp*1000).toUTCString()):\'\';';
-		$js .= 'var sec=' . wp_json_encode( $secure_attr ) . ';';
-		$js .= 'document.cookie=n+\'=\'+encodeURIComponent(v)+\'; path=/; SameSite=Lax\'+s+sec;';
-		$js .= 'window._ovenSyncConsentFromCookie=' . wp_json_encode( $decoded ) . ';})();';
-
-		return $js;
-	}
-
-	/**
-	 * Build JS that clears consent and session-verification cookies (logged-in re-prompt paths).
-	 */
-	private function build_clear_consent_cookies_js(): string {
-		$cookie_name = 'oven_cc';
-		$sess_name   = self::SESSION_VERIFIED_COOKIE;
-
-		$js  = '(function(){var path=\'; path=/\';var exp=\'; expires=Thu, 01 Jan 1970 00:00:01 GMT\';';
-		$js .= 'document.cookie=' . wp_json_encode( $cookie_name ) . '+\'=\'+path+exp;';
-		$js .= 'document.cookie=' . wp_json_encode( $sess_name ) . '+\'=\'+path+exp;';
-		$js .= 'var host=typeof location!==\'undefined\'&&location.hostname||\'\';';
-		$js .= 'if(host&&host.indexOf(\'.\')!==-1){';
-		$js .= 'document.cookie=' . wp_json_encode( $cookie_name ) . '+\'=\'+path+\'; domain=\'+host+exp;';
-		$js .= 'document.cookie=' . wp_json_encode( $cookie_name ) . '+\'=\'+path+\'; domain=.\'+host+exp;';
-		$js .= 'document.cookie=' . wp_json_encode( $sess_name ) . '+\'=\'+path+\'; domain=\'+host+exp;';
-		$js .= 'document.cookie=' . wp_json_encode( $sess_name ) . '+\'=\'+path+\'; domain=.\'+host+exp;}';
-		$js .= '})();';
-
-		return $js;
+		$encoded = wp_json_encode( $sanitized );
+		if ( ! is_string( $encoded ) || $encoded === '' ) {
+			return null;
+		}
+		return array( 'value' => $encoded, 'decoded' => $sanitized );
 	}
 }

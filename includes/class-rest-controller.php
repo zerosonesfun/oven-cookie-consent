@@ -158,7 +158,9 @@ class Rest_Controller {
 		$result  = $this->cookie_manager->merge_detected_cookies( $cookies );
 
 		$script_mapping = array();
-		$script_mapping_json = Consent_Sanitizer::get_post_json_string( 'script_mapping' );
+		$script_mapping_json = isset( $_POST['script_mapping'] ) && is_string( $_POST['script_mapping'] )
+			? sanitize_textarea_field( wp_unslash( $_POST['script_mapping'] ) )
+			: '';
 		if ( $script_mapping_json !== '' ) {
 			$script_mapping = Consent_Sanitizer::sanitize_script_mapping_json( $script_mapping_json );
 		}
@@ -183,7 +185,9 @@ class Rest_Controller {
 		if ( ! is_user_logged_in() ) {
 			wp_send_json_error( array( 'message' => __( 'Not logged in.', 'oven-cookie-consent' ) ), 403 );
 		}
-		$consent_json = Consent_Sanitizer::get_post_json_string( 'consent' );
+		$consent_json = isset( $_POST['consent'] ) && is_string( $_POST['consent'] )
+			? sanitize_textarea_field( wp_unslash( $_POST['consent'] ) )
+			: '';
 		if ( $consent_json === '' ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid consent data.', 'oven-cookie-consent' ) ), 400 );
 		}

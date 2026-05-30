@@ -71,7 +71,7 @@ class User_Consent_Profile {
 
 		if ( $has_current ) {
 			echo '<p><strong>' . esc_html__( 'Current consent', 'oven-cookie-consent' ) . '</strong></p>';
-			echo $this->format_consent_summary( $current ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo wp_kses_post( $this->format_consent_summary( $current ) );
 		}
 
 		if ( $has_history ) {

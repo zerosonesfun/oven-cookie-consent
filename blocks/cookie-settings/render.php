@@ -17,10 +17,9 @@ if ( function_exists( 'oven' ) && oven()->get_settings()->is_hide_from_guests() 
 	return '';
 }
 
-$oven_text               = isset( $attributes['text'] ) && is_string( $attributes['text'] ) ? $attributes['text'] : __( 'Cookie Settings', 'oven-cookie-consent' );
-$oven_wrapper_attributes = get_block_wrapper_attributes( array( 'class' => 'wp-block-oven-cookie-settings' ) );
+$oven_text = isset( $attributes['text'] ) && is_string( $attributes['text'] ) ? sanitize_text_field( $attributes['text'] ) : __( 'Cookie Settings', 'oven-cookie-consent' );
 ?>
-<div <?php echo $oven_wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns escaped output. ?>>
+<div <?php echo get_block_wrapper_attributes( array( 'class' => 'wp-block-oven-cookie-settings' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Core API: attributes are escaped for output. ?>>
 	<button type="button" class="cookie-settings wp-block-button__link" data-cc="show-preferencesModal" aria-label="<?php echo esc_attr( $oven_text ); ?>">
 		<?php echo esc_html( $oven_text ); ?>
 	</button>

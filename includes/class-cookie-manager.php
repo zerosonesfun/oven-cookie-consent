@@ -314,11 +314,12 @@ class Cookie_Manager {
 		}
 
 		$cookie_name = 'oven_cc';
-		if ( empty( $_COOKIE[ $cookie_name ] ) || ! is_string( $_COOKIE[ $cookie_name ] ) ) {
+		$raw         = Consent_Sanitizer::get_cookie_value( $cookie_name );
+		if ( $raw === '' ) {
 			return null;
 		}
 		return Consent_Sanitizer::parse_guest_consent_cookie(
-			Consent_Sanitizer::get_cookie_value( $cookie_name ),
+			$raw,
 			$this->settings->get_revision()
 		);
 	}

@@ -118,11 +118,7 @@ class Settings {
 			'oven_main',
 			__( 'Cookie Consent', 'oven-cookie-consent' ),
 			array( $this, 'section_main_callback' ),
-			'oven',
-			array(
-				'before_section' => '<div id="oven-main-section" class="oven-settings-section">',
-				'after_section'  => '</div>',
-			)
+			'oven'
 		);
 
 		add_settings_field(
@@ -177,11 +173,7 @@ class Settings {
 			'oven_detected',
 			'', // Title output in callback above the table as "Cookies".
 			array( $this, 'section_detected_callback' ),
-			'oven',
-			array(
-				'before_section' => '<div id="oven-detected-section" class="oven-settings-section">',
-				'after_section'  => '</div>',
-			)
+			'oven'
 		);
 	}
 
@@ -364,7 +356,7 @@ class Settings {
 		}
 
 		// Handle save cookie descriptions form POST. Store in separate option so detection/merge never overwrites.
-		if ( isset( $_SERVER['REQUEST_METHOD'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['oven_save_cookie_descriptions'] ) ) {
+		if ( $this->is_post_request() && isset( $_POST['oven_save_cookie_descriptions'] ) ) {
 			$redirect_url = admin_url( 'options-general.php?page=oven' );
 			$nonce        = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
 			if ( ! wp_verify_nonce( $nonce, 'oven_cookie_override' ) ) {
@@ -409,7 +401,7 @@ class Settings {
 		}
 
 		// Handle manual add-cookie form POST.
-		if ( isset( $_SERVER['REQUEST_METHOD'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['oven_manual_add_cookie'] ) ) {
+		if ( $this->is_post_request() && isset( $_POST['oven_manual_add_cookie'] ) ) {
 			$redirect_url = admin_url( 'options-general.php?page=oven' );
 			$nonce        = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
 			if ( ! wp_verify_nonce( $nonce, 'oven_cookie_override' ) ) {
@@ -437,7 +429,7 @@ class Settings {
 		}
 
 		// Handle add-pattern form POST (form posts to this same page; no AJAX).
-		if ( isset( $_SERVER['REQUEST_METHOD'] ) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['oven_add_pattern'] ) ) {
+		if ( $this->is_post_request() && isset( $_POST['oven_add_pattern'] ) ) {
 			$nonce = isset( $_POST['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ) : '';
 			if ( wp_verify_nonce( $nonce, 'oven_cookie_override' ) ) {
 				$pattern = isset( $_POST['oven_pattern'] ) ? sanitize_text_field( wp_unslash( $_POST['oven_pattern'] ) ) : '';
@@ -698,10 +690,6 @@ class Settings {
 
 		$section = $wp_settings_sections[ $page ][ $section_id ];
 
-		if ( ! empty( $section['before_section'] ) ) {
-			echo $section['before_section']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- markup from plugin.
-		}
-
 		if ( ! empty( $section['callback'] ) && is_callable( $section['callback'] ) ) {
 			call_user_func( $section['callback'], $section );
 		}
@@ -715,19 +703,24 @@ class Settings {
 		}
 
 		if ( ! isset( $wp_settings_fields[ $page ][ $section_id ] ) ) {
-			if ( ! empty( $section['after_section'] ) ) {
-				echo $section['after_section']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- markup from plugin.
-			}
 			return;
 		}
 
 		echo '<table class="form-table" role="presentation">';
 		do_settings_fields( $page, $section_id );
 		echo '</table>';
+	}
 
-		if ( ! empty( $section['after_section'] ) ) {
-			echo $section['after_section']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- markup from plugin.
-		}
+	/**
+	 * Whether the current request is an HTTP POST.
+	 *
+	 * @return bool
+	 */
+	private function is_post_request(): bool {
+		$method = isset( $_SERVER['REQUEST_METHOD'] )
+			? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD'] ) )
+			: '';
+		return $method === 'POST';
 	}
 
 	/**
@@ -766,12 +759,16 @@ class Settings {
 			<form action="options.php" method="post" id="oven-settings-form">
 				<?php
 				settings_fields( 'oven_settings_group' );
+				echo '<div id="oven-main-section" class="oven-settings-section">';
 				$this->render_single_section( 'oven', 'oven_main' );
+				echo '</div>';
 				submit_button( __( 'Save settings', 'oven-cookie-consent' ) );
 				?>
 			</form>
 			<?php
+			echo '<div id="oven-detected-section" class="oven-settings-section">';
 			$this->render_single_section( 'oven', 'oven_detected' );
+			echo '</div>';
 			?>
 		</div>
 		<?php

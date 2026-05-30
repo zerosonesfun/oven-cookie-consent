@@ -4,7 +4,7 @@ Tags: cookies, consent, gdpr, privacy, cookie banner
 Requires at least: 5.9
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.0.7
+Stable tag: 1.0.9
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,14 @@ When detection mode is on and you (as an admin) browse the site, any new cookie 
 
 == Changelog ==
 
+= 1.0.9 =
+* Security: route all cookie reads through Consent_Sanitizer; sanitize block attribute text; sanitize localized cookie names for head scripts.
+
+= 1.0.8 =
+* WordPress.org security review: sanitize $_COOKIE and $_POST JSON on read; escape admin HTML output (wp_kses_post, literal section wrappers).
+* Head bootstrap uses static JS files with wp_localize_script() instead of wp_add_inline_script().
+* Inline consent scripts use canonical JSON from sanitized consent payloads only.
+
 = 1.0.7 =
 * Text domain set to oven-cookie-consent to match WordPress.org plugin slug.
 * Plugin URI set to https://wilcosky.com/oven (distinct from author URI).
@@ -139,6 +147,12 @@ When detection mode is on and you (as an admin) browse the site, any new cookie 
 * CookieConsent (v3.1.0) by Orest Bida – https://github.com/orestbida/cookieconsent – MIT License.
 
 == Upgrade Notice ==
+
+= 1.0.9 =
+Security hardening for WordPress.org plugin review.
+
+= 1.0.8 =
+Security hardening for WordPress.org review (input sanitization and output escaping).
 
 = 1.0.7 =
 Text domain and WordPress.org submission fixes (no functional changes for existing installs).

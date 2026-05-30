@@ -25,31 +25,23 @@ final class Consent_Sanitizer {
 	 * Read a request cookie value for JSON decoding (sanitized after decode).
 	 *
 	 * @param string $name Cookie name.
-	 * @return string Raw cookie value or empty string.
+	 * @return string Sanitized cookie value or empty string.
 	 */
 	public static function get_cookie_value( string $name ): string {
-		if ( empty( $_COOKIE[ $name ] ) || ! is_string( $_COOKIE[ $name ] ) ) {
+		if ( ! isset( $_COOKIE[ $name ] ) || ! is_string( $_COOKIE[ $name ] ) ) {
 			return '';
 		}
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON payload; structure sanitized after decode.
-		return wp_unslash( $_COOKIE[ $name ] );
+		return sanitize_textarea_field( wp_unslash( $_COOKIE[ $name ] ) );
 	}
 
 	/**
-	 * Read a POST field expected to contain JSON (sanitized after decode).
+	 * Sanitize a raw JSON string (caller must verify nonce before reading $_POST).
 	 *
-	 * @param string $key POST key.
-	 * @return string Raw JSON string or empty string.
+	 * @param string $raw Unslashed POST value.
+	 * @return string Sanitized JSON string.
 	 */
-	public static function get_post_json_string( string $key ): string {
-		// phpcs:disable WordPress.Security.NonceVerification.Missing -- Callers must verify nonce before reading POST (e.g. ajax_save_consent).
-		if ( ! isset( $_POST[ $key ] ) || ! is_string( $_POST[ $key ] ) ) {
-			return '';
-		}
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON payload; structure sanitized after decode.
-		$value = wp_unslash( $_POST[ $key ] );
-		// phpcs:enable WordPress.Security.NonceVerification.Missing
-		return $value;
+	public static function sanitize_json_string( string $raw ): string {
+		return sanitize_textarea_field( $raw );
 	}
 
 	/**
